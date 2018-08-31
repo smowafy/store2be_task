@@ -1,0 +1,12 @@
+[
+  {"title":"Space 1","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 2","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 3","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 4","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 5","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 6","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 7","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 8","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 9","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789},
+  {"title":"Space 10","size":10,"price_per_day":123,"price_per_week":456,"price_per_month":789}
+]

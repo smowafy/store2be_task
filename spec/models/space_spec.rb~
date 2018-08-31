@@ -1,0 +1,85 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe Space, type: :model do
+  describe '#self.parse_query' do
+    context 'when invalid parameters are provided' do
+      let(:input_hash) {
+        {
+          title: 'like:abc',
+          invalid: 'eq:3'
+        }
+      }
+
+      it 'should throw an error' do
+        expect { Space.parse_query(input_hash) }.to raise_error(Space::InvalidQuery)
+      end
+    end
+
+    context 'when valid parameters but invalid matchers are provided' do
+      let(:input_hash) {
+        {
+          title: 'like:abc',
+          size: 'lt:3',
+          price_per_week: 'like:random'
+        }
+      }
+
+      it 'should throw an error' do
+        expect { Space.parse_query(input_hash) }.to raise_error(Space::InvalidQuery)
+      end
+    end
+
+    context 'when valid params and valid matchers are provided' do
+      let(:input_hash) {
+        {
+          title: 'like:abc',
+          size: 'eq:4',
+          price_per_day: 'lt:5'
+        }
+      }
+
+      let(:expected_return_value) {
+        ['title LIKE ? AND size = ? AND price_per_day < ?', '%abc%', '4', '5']
+      }
+
+      it 'should return the expected query' do
+        return_value = Space.parse_query(input_hash)
+        expect(return_value).to eq(expected_return_value)
+      end
+    end
+  end
+
+  describe '#price_quote' do
+    let(:end_date) {
+      Time.now
+    }
+
+    let(:start_date) {
+      42.days.until(end_date)
+    }
+
+    let(:valid_parameters) {
+      store = Store.create!(title: 'Store 1', city: 'City 1', street: 'Street 1')
+
+      {
+        title: 'Space 1',
+        size: 10,
+        price_per_day: 100,
+        price_per_week: 500,
+        price_per_month: 2350,
+        store: store.id
+      }
+    }
+
+    let(:expected_value) {
+      3350
+    }
+
+    it 'should return the correct value for quote' do
+      space = Space.create! valid_parameters
+      expect(space.price_quote(start_date, end_date)).to eq(expected_value)
+    end
+  end
+end

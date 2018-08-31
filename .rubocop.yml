@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+  - db/**/*.rb
+  - config/**/*.rb
+  - Gemfile
+  - Rakefile
+  - bin/**
+  - test/**/*.rb
+Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+  - spec/**/*.rb
